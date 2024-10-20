@@ -1,9 +1,4 @@
-# .NET Core Microservices - The Complete Guide (.NET 8 MVC)
-
-## Overview
-
-This repository contains code and resources for the Udemy course [".NET Core Microservices - The Complete Guide (.NET 6 MVC)"](https://lg.udemy.com/course/net-core-microservices-the-complete-guide-net-6-mvc/learn/lecture/38026986#overview). The course provides a comprehensive introduction to microservices using .NET 6 and ASP.NET Core MVC.
-
+# .NET Core Microservices
 
 ### Prerequisites
 - Basic understanding of C# and .NET Core
@@ -27,26 +22,12 @@ This repository contains code and resources for the Udemy course [".NET Core Mic
 5. **Docker for Microservices**  
    Learn how to containerize microservices using Docker. Understand the concepts of container orchestration with Docker Compose.
 
-6. **Securing Microservices**  
-   Integrate Identity Server 4 to handle authentication and authorization securely across your services.
-
-7. **Event-Driven Architecture with MassTransit**  
-   Explore event-driven communication with MassTransit and RabbitMQ, allowing microservices to react asynchronously to events.
-
-8. **Logging and Monitoring**  
-   Implement logging with Serilog, centralized logging using ELK stack, and monitor your microservices using Prometheus and Grafana for real-time performance metrics.
-
 ### Tools & Technologies Used
 - **.NET 8**
 - **ASP.NET Core MVC**
 - **RabbitMQ**
 - **MassTransit**
 - **Docker**
-- **Ocelot**
-- **Identity Server**
-- **Serilog**
-- **Prometheus**
-- **Grafana**
 
 ### Getting Started
 
