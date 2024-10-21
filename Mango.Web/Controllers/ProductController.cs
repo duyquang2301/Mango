@@ -74,7 +74,6 @@ namespace Mango.Web.Controllers
         }
 
         [HttpPost]
-        [HttpPost]
         public async Task<IActionResult> ProductDelete(ProductDto productDto)
         {
             ResponseDto? response = await _productService.DeleteProductsAsync(productDto.ProductId);
