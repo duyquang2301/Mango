@@ -1,7 +1,7 @@
 ﻿using Mango.Services.EmailAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mango.Services.CouponAPI.Data
+namespace Mango.Services.EmailAPI.Data
 {
     public class AppDbContext : DbContext
     {
