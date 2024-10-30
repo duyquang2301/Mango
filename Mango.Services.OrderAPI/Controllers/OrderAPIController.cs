@@ -111,15 +111,17 @@ namespace Mango.Services.OrderAPI.Controllers
         {
             try
             {
-                var options = new Stripe.Checkout.SessionCreateOptions
+
+                var options = new SessionCreateOptions
                 {
                     SuccessUrl = stripeRequestDto.ApprovedUrl,
                     CancelUrl = stripeRequestDto.CancelUrl,
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
-                };
 
-                foreach(var item in stripeRequestDto.OrderHeader.OrderDetails)
+                };          
+
+                foreach (var item in stripeRequestDto.OrderHeader.OrderDetails)
                 {
                     var sessionLineItem = new SessionLineItemOptions
                     {
@@ -134,6 +136,7 @@ namespace Mango.Services.OrderAPI.Controllers
                         },
                         Quantity = item.Count
                     };
+
                     options.LineItems.Add(sessionLineItem);
                 }
 
@@ -144,13 +147,13 @@ namespace Mango.Services.OrderAPI.Controllers
                 orderHeader.StripeSessionId = session.Id;
                 _db.SaveChanges();
                 _response.Result = stripeRequestDto;
+
             }
             catch (Exception ex)
             {
-                _response.IsSuccess = false;
                 _response.Message = ex.Message;
+                _response.IsSuccess = false;
             }
-
             return _response;
         }
     }
