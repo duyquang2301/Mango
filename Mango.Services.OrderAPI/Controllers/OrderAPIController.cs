@@ -119,7 +119,15 @@ namespace Mango.Services.OrderAPI.Controllers
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
 
-                };          
+                };
+
+                var discountObj = new List<SessionDiscountOptions>()
+                {
+                    new SessionDiscountOptions()
+                    {
+                        Coupon = stripeRequestDto.OrderHeader.CouponCode,
+                    }
+                };
 
                 foreach (var item in stripeRequestDto.OrderHeader.OrderDetails)
                 {
@@ -138,6 +146,11 @@ namespace Mango.Services.OrderAPI.Controllers
                     };
 
                     options.LineItems.Add(sessionLineItem);
+                }
+
+                if (stripeRequestDto.OrderHeader.Discount > 0)
+                {
+                    options.Discounts = discountObj;
                 }
 
                 var service = new SessionService();
