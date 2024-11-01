@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom   shadow-sm mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mango.Web</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -22,10 +22,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,28 +38,28 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Cart" asp-action="CartIndex">
+                            <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="CartIndex">
                                 &nbsp; <i class="bi bi-cart"></i>&nbsp;
                             </a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        @if (!User.Identity.IsAuthenticated)
+                        @if (User?.Identity?.IsAuthenticated == false)
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-controller="Auth" asp-action="Login">Login</a>
+                                <a class="nav-link" asp-controller="Auth" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " asp-controller="Auth" asp-action="Register">Register</a>
+                                <a class="nav-link" asp-controller="Auth" asp-action="Register">Register</a>
                             </li>
                         }
-                        else
+                        else if (User?.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
-                                <a class="nav-link " href="#">Hello, @User.Identity.Name</a>
+                                <a class="nav-link" href="#">Hello, @User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " asp-controller="Auth" asp-action="Logout">Logout</a>
+                                <a class="nav-link" asp-controller="Auth" asp-action="Logout">Logout</a>
                             </li>
                         }
                     </ul>
@@ -67,16 +67,16 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container main-content">
         <main role="main" class="pb-3">
             @RenderBody()
             <partial name="_Notifications" />
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="text-center">
-            Made with <i class="bi bi-heart-fill "></i> by DotNetMastery
+    <footer class="footer text-center mt-auto">
+        <div class="container">
+            Made with <i class="bi bi-heart-fill"></i> by DotNetMastery
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
