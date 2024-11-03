@@ -27,8 +27,8 @@
 
         public enum ContentType
         {
-            JSON,
-            MultiPartFormData
+            Json,
+            MultipartFormData,
         }
     }
 }

@@ -65,23 +65,32 @@ namespace Mango.Services.ProductAPI.Controllers
                 _db.Products.Add(product);
                 _db.SaveChanges();
 
-                if (product.ImageUrl != null)
+                if (ProductDto.Image != null)
                 {
+
                     string fileName = product.ProductId + Path.GetExtension(ProductDto.Image.FileName);
-                    string filePath = @"wwwroot/images/" + fileName;
+                    string filePath = @"wwwroot\ProductImages\" + fileName;
+
+                    //I have added the if condition to remove the any image with same name if that exist in the folder by any change
+                    var directoryLocation = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+                    FileInfo file = new FileInfo(directoryLocation);
+                    if (file.Exists)
+                    {
+                        file.Delete();
+                    }
+
                     var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), filePath);
                     using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
                     {
                         ProductDto.Image.CopyTo(fileStream);
                     }
-
                     var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
-                    product.ImageUrl = baseUrl + "/ProductImages" + fileName;
+                    product.ImageUrl = baseUrl + "/ProductImages/" + fileName;
                     product.ImageLocalPath = filePath;
                 }
                 else
                 {
-                    product.ImageUrl = "http://placehole.co/600x400";
+                    product.ImageUrl = "https://placehold.co/600x400";
                 }
                 _db.Products.Update(product);
                 _db.SaveChanges();
@@ -94,7 +103,6 @@ namespace Mango.Services.ProductAPI.Controllers
             }
             return _response;
         }
-
 
         [HttpPut]
         [Authorize(Roles = "ADMIN")]

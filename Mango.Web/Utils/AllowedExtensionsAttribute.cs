@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿﻿using System.ComponentModel.DataAnnotations;
 
 namespace Mango.Web.Utility
 {
@@ -12,6 +12,11 @@ namespace Mango.Web.Utility
 
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
+            if (value == null)
+            {
+                return new ValidationResult("The Image field is required.");
+            }
+
             var file = value as IFormFile;
 
             if (file != null)
@@ -25,6 +30,5 @@ namespace Mango.Web.Utility
 
             return ValidationResult.Success;
         }
-
     }
 }

@@ -24,7 +24,7 @@ namespace Mango.Web.Service
                 HttpRequestMessage message = new();
                 message.Headers.Add("Accept", "application/json");
 
-                if(requestDto.ContentType == ContentType.MultiPartFormData)
+                if (requestDto.ContentType == ContentType.MultipartFormData)
                 {
                     message.Headers.Add("Accept", "*/*");
                 }
@@ -33,7 +33,7 @@ namespace Mango.Web.Service
                     message.Headers.Add("Accept", "application/json");
                 }
 
-                if(withBearer)
+                if (withBearer)
                 {
                     var token = _tokenProvider.GetToken();
                     message.Headers.Add("Authorization", $"Bearer {token}");
@@ -41,9 +41,10 @@ namespace Mango.Web.Service
 
                 message.RequestUri = new Uri(requestDto.Url);
 
-                if(requestDto.ContentType == ContentType.MultiPartFormData)
+                if (requestDto.ContentType == ContentType.MultipartFormData)
                 {
                     var content = new MultipartFormDataContent();
+
                     foreach (var prop in requestDto.Data.GetType().GetProperties())
                     {
                         var value = prop.GetValue(requestDto.Data);
@@ -54,13 +55,13 @@ namespace Mango.Web.Service
                             {
                                 content.Add(new StreamContent(file.OpenReadStream()), prop.Name, file.FileName);
                             }
-                            else
-                            {
-                                content.Add(new StringContent(value == null ? "" : value.ToString()), prop.Name);
-                            }
                         }
-                        message.Content = content;
+                        else
+                        {
+                            content.Add(new StringContent(value == null ? "" : value.ToString()), prop.Name);
+                        }
                     }
+                    message.Content = content;
                 }
                 else
                 {
