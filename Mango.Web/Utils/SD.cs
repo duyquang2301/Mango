@@ -8,7 +8,7 @@
         public static string OrderAPIBase { get; set; }
         public static string ShoppingCartAPIBase { get; set; }
         public const string RoleAdmin = "ADMIN";
-        public const string RoleCustomer= "CUSTOMER";
+        public const string RoleCustomer = "CUSTOMER";
         public const string TokenCookie = "JWToken";
 
         public const string Status_Pending = "Pending";
@@ -23,6 +23,12 @@
             POST,
             PUT,
             DELETE
+        }
+
+        public enum ContentType
+        {
+            JSON,
+            MultiPartFormData
         }
     }
 }
